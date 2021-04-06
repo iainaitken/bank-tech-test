@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'bank_account'
 
 RSpec.describe BankAccount do
@@ -10,7 +12,8 @@ RSpec.describe BankAccount do
   describe '#deposit_funds' do
     it 'lets the user add funds' do
       deposit = 1000.00
-      expect(subject.deposit_funds(deposit)).to eq("You have deposited £#{deposit} into your account.")
+      expect(subject.deposit_funds(deposit))
+        .to eq("You have deposited £#{deposit} into your account. Your balance is now #{subject.balance}")
     end
 
     it 'increases the users account balance' do
@@ -21,7 +24,8 @@ RSpec.describe BankAccount do
 
     it 'will not accept a negative number' do
       deposit = -1000.00
-      expect(subject.deposit_funds(deposit)).to eq("Please enter a valid number.")
+      expect(subject.deposit_funds(deposit))
+        .to eq('Please enter a valid number.')
     end
   end
 
@@ -31,21 +35,23 @@ RSpec.describe BankAccount do
       subject.deposit_funds(deposit)
       withdrawal = 500.00
 
-      expect(subject.withdraw_funds(withdrawal)).to eq("You have withdrawn £#{withdrawal} from your account.")
+      expect(subject.withdraw_funds(withdrawal))
+        .to eq("You have withdrawn £#{withdrawal} from your account.")
     end
 
     it 'decreases the users account balance' do
       subject.deposit_funds(1000.00)
       subject.withdraw_funds(500.00)
-      
+
       expect(subject.balance).to eql(500.00)
     end
 
     it 'will not allow the account to be overdrawn' do
       subject.deposit_funds(1000.00)
       withdrawal = 1500.00
-      
-      expect(subject.withdraw_funds(withdrawal)).to eq("You cannot withdraw that much; your account balance is #{subject.balance}.")
+
+      expect(subject.withdraw_funds(withdrawal))
+        .to eq("You cannot withdraw that much; your account balance is #{subject.balance}.")
     end
   end
 end
