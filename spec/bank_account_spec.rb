@@ -18,5 +18,10 @@ RSpec.describe BankAccount do
 
       expect(subject.balance).to eql(1000.00)
     end
+
+    it 'will not accept a negative number' do
+      deposit = -1000.00
+      expect(subject.deposit_funds(deposit)).to eq("Please enter a valid number.")
+    end
   end
 end

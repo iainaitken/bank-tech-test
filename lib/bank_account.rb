@@ -7,7 +7,11 @@ class BankAccount
   end
 
   def deposit_funds(amount)
-    @balance += amount
-    "You have deposited £#{amount} into your account."
+    if amount > 0
+      @balance += amount
+      "You have deposited £#{amount} into your account."
+    else
+      "Please enter a valid number."
+    end
   end
 end
