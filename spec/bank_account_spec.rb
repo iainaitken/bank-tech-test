@@ -12,5 +12,11 @@ RSpec.describe BankAccount do
       deposit = 1000.00
       expect(subject.deposit_funds(deposit)).to eq("You have deposited £#{deposit} into your account.")
     end
+
+    it 'increases the users account balance' do
+      subject.deposit_funds(1000.00)
+
+      expect(subject.balance).to eql(1000.00)
+    end
   end
 end
