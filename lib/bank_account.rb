@@ -1,27 +1,35 @@
 # frozen_string_literal: true
 
 class BankAccount
-  attr_reader :balance
-
-  DEFAULT_BALANCE = 0.00
+  DEFAULT_BALANCE = 0
 
   def initialize
     @balance = DEFAULT_BALANCE
+  end
+
+  def balance
+    format(@balance)
   end
 
   def deposit_funds(amount)
     return 'Please enter a valid number.' if amount <= 0
 
     @balance += amount
-    "You have deposited £#{amount} into your account. Your balance is now #{@balance}"
+    "You have deposited #{format(amount)} into your account. Your balance is now #{format(@balance)}"
   end
 
   # to do - guard against too many decimal places. Extract to a separate error class, or to a private method
 
   def withdraw_funds(amount)
-    return "You cannot withdraw that much; your account balance is #{@balance}." if amount > @balance
+    return "You cannot withdraw that much; your account balance is #{format(@balance)}." if amount > @balance
 
     @balance -= amount
-    "You have withdrawn £#{amount} from your account."
+    "You have withdrawn #{format(amount)} from your account."
+  end
+
+  private
+
+  def format(number)
+    sprintf('£%.2f', number / 100)
   end
 end
