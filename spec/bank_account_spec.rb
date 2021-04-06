@@ -23,5 +23,7 @@ RSpec.describe BankAccount do
       deposit = -1000.00
       expect(subject.deposit_funds(deposit)).to eq("Please enter a valid number.")
     end
+
+    
   end
 end
