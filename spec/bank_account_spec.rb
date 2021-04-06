@@ -23,7 +23,16 @@ RSpec.describe BankAccount do
       deposit = -1000.00
       expect(subject.deposit_funds(deposit)).to eq("Please enter a valid number.")
     end
+  end
 
-    
+  describe '#withdraw_funds' do
+    it 'allows the user to withdraw money from the account' do
+      deposit = 1000.00
+      subject.deposit_funds(deposit)
+
+      withdrawal = 500.00
+
+      expect(subject.withdraw_funds(withdrawal)).to eq("You have withdrawn £#{withdrawal} from your account.")
+    end
   end
 end

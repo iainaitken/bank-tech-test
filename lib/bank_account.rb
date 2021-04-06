@@ -12,4 +12,10 @@ class BankAccount
     @balance += amount
     "You have deposited £#{amount} into your account."
   end
+
+  # to do - guard against too many decimal places. Extract to a separate error class, or to a private method
+
+  def withdraw_funds(amount)
+    "You have withdrawn £#{amount} from your account."
+  end
 end
