@@ -16,7 +16,11 @@ class BankAccount
   # to do - guard against too many decimal places. Extract to a separate error class, or to a private method
 
   def withdraw_funds(amount)
-    @balance -= amount
-    "You have withdrawn £#{amount} from your account."
+    if amount > @balance
+      return "You cannot withdraw that much; your account balance is #{@balance}."
+    else
+      @balance -= amount
+      "You have withdrawn £#{amount} from your account."
+    end
   end
 end

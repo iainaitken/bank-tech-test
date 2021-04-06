@@ -40,5 +40,12 @@ RSpec.describe BankAccount do
       
       expect(subject.balance).to eql(500.00)
     end
+
+    it 'will not allow the account to be overdrawn' do
+      subject.deposit_funds(1000.00)
+      withdrawal = 1500.00
+      
+      expect(subject.withdraw_funds(withdrawal)).to eq("You cannot withdraw that much; your account balance is #{subject.balance}.")
+    end
   end
 end
