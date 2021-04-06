@@ -49,5 +49,11 @@ RSpec.describe BankAccount do
       expect(subject.withdraw_funds(1500))
         .to eq("You cannot withdraw that much; your account balance is #{subject.balance}.")
     end
+
+    it 'will not accept an invalid number' do
+      subject.deposit_funds(1000)
+      expect(subject.withdraw_funds(15.89))
+        .to eq("Please enter an amount in pence; for example, for £10.50, enter 1050.")
+    end
   end
 end
