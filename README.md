@@ -4,7 +4,7 @@
 
 ## Tech Stack
 
-Ruby Version 2.7.2
+Ruby version 2.7.2
 
 Gems:
 
