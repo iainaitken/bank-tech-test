@@ -69,3 +69,10 @@ When she prints her bank statement she would see
 | ----------- | --- |
 | Load account data | BankAccount |
 | Save account data | BankAccount |
+
+### Edge cases
+
+Edge cases to consider:
+
+* Cannot withdraw more than is in the account.
+* Can only deposit in a float format, to 2 decimal places

@@ -5,4 +5,8 @@ class BankAccount
   def initialize
     @balance = DEFAULT_BALANCE
   end
+
+  def deposit_funds(amount)
+    "You have deposited £#{amount} into your account."
+  end
 end
