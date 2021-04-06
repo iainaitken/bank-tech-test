@@ -29,10 +29,16 @@ RSpec.describe BankAccount do
     it 'allows the user to withdraw money from the account' do
       deposit = 1000.00
       subject.deposit_funds(deposit)
-
       withdrawal = 500.00
 
       expect(subject.withdraw_funds(withdrawal)).to eq("You have withdrawn £#{withdrawal} from your account.")
+    end
+
+    it 'decreases the users account balance' do
+      subject.deposit_funds(1000.00)
+      subject.withdraw_funds(500.00)
+      
+      expect(subject.balance).to eql(500.00)
     end
   end
 end
