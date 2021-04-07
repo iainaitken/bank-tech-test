@@ -1,10 +1,12 @@
 class TransactionValidator
-  def self.check(date:, type:, amount:)
+  def self.check(date:, type:, amount:, balance:)
     case false
     when check_amount(amount)
       'Please enter a valid amount.'
     when check_transaction_type(type)
       'Please enter a valid transaction type.'
+    when check_overdrawn(amount, balance)
+      'You cannot withdraw that much; please try again.'
     end
   end
 
@@ -16,5 +18,9 @@ class TransactionValidator
 
   def self.check_transaction_type(type)
     type == 'credit' || type == 'debit'
+  end
+
+  def self.check_overdrawn(amount, balance)
+    amount < balance
   end
 end
