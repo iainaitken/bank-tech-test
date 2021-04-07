@@ -4,16 +4,14 @@
 class BankAccount
   attr_reader :account_balance, :transaction_history
 
-  DEFAULT_BALANCE = 0
-
   def initialize(transaction_class = Transaction, statement_class = Statement)
-    @account_balance = DEFAULT_BALANCE
+    @account_balance = 0
     @transaction_history = []
     @transaction_class = transaction_class
     @statement_class = statement_class
   end
 
-  def add_transaction(date, type, amount)
+  def add_transaction(date:, type:, amount:)
     validation_message = TransactionValidator.check(date, type, amount, @account_balance)
     if validation_message == 'OK'
       create_and_store_transaction(date, type, amount)
@@ -30,12 +28,7 @@ class BankAccount
   private
 
   def create_and_store_transaction(date, type, amount)
-    transaction = @transaction_class.new(
-      date: date,
-      type: type,
-      amount: amount,
-      starting_balance: @account_balance
-    )
+    transaction = @transaction_class.new(date, type, amount, @account_balance)
     @transaction_history.push(transaction)
   end
 

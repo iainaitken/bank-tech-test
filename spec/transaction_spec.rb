@@ -4,12 +4,7 @@ require 'transaction'
 
 RSpec.describe Transaction do
   subject do
-    described_class.new(
-      date: '06/04/2021',
-      type: 'credit',
-      amount: 500,
-      starting_balance: 500
-    )
+    described_class.new('06/04/2021', 'credit', 500, 500)
   end
 
   it 'stores the date of a transaction' do
