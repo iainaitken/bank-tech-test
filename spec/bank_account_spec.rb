@@ -25,9 +25,14 @@ RSpec.describe BankAccount do
         expect(subject.transaction_history.first).to be(transaction)
       end
       
-      #  it 'updates the account balance' do
-      # 
-      # end
+      it 'updates the account balance' do
+        transaction_class = class_double('Transaction', new: transaction).as_stubbed_const
+        subject.add_transaction('06/04/2021', 'credit', 500)
+  
+        expect(subject.transaction_history.length).to eq(1)
+        expect(subject.transaction_history.first).to be(transaction)
+        expect(subject.balance).to eq('£500.00')
+      end
     end
   end
 end
