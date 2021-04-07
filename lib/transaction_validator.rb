@@ -5,8 +5,10 @@ class TransactionValidator
       'Please enter a valid amount.'
     when check_transaction_type(type)
       'Please enter a valid transaction type.'
-    when check_overdrawn(amount, balance)
+    when check_overdrawn(amount, balance, type)
       'You cannot withdraw that much; please try again.'
+    else
+      'OK'
     end
   end
 
@@ -20,7 +22,9 @@ class TransactionValidator
     type == 'credit' || type == 'debit'
   end
 
-  def self.check_overdrawn(amount, balance)
-    amount < balance
+  def self.check_overdrawn(amount, balance, type)
+    if type == 'debit'
+      false if amount > balance
+    end
   end
 end

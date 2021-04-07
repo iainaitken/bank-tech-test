@@ -28,5 +28,10 @@ RSpec.describe TransactionValidator do
       expect(subject.check(date: '06/04/2021', type: 'debit', amount: 1000, balance: 500))
         .to eq('You cannot withdraw that much; please try again.')
     end
+
+    it 'clears valid transactions' do
+      expect(subject.check(date: '06/04/2021', type: 'credit', amount: 1000, balance: 500))
+        .to eq('OK')
+    end
   end
 end
