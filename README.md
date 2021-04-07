@@ -43,7 +43,7 @@ To run the test suite, enter the following command in the project folder:
 % rspec
 ```
 
-Test coverage is currently 96.52%.
+Test coverage is currently 100%.
 
 ### Usage
 
