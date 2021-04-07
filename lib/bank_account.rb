@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
+# This class holds transaction data and allows funds to be added to or withdrawn from the account.
 class BankAccount
-  attr_reader :transaction_history
+  attr_reader :account_balance, :transaction_history
 
   DEFAULT_BALANCE = 0
 
@@ -9,10 +10,6 @@ class BankAccount
     @account_balance = DEFAULT_BALANCE
     @transaction_history = []
     @transaction_class = transaction_class
-  end
-
-  def balance
-    format(@account_balance)
   end
 
   def add_transaction(date, type, amount)
@@ -26,10 +23,6 @@ class BankAccount
   end
 
   private
-
-  def format(number)
-    '£%.2f' % number
-  end
 
   def create_and_store_transaction(date, type, amount)
     transaction = @transaction_class.new(

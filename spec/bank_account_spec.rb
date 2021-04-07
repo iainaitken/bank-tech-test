@@ -6,7 +6,7 @@ RSpec.describe BankAccount do
   subject { described_class.new }
 
   it 'knows the balance of the account' do
-    expect(subject.balance).to eq('£0.00')
+    expect(subject.account_balance).to eq(0)
   end
 
   it 'starts with an empty transaction history' do
@@ -31,7 +31,7 @@ RSpec.describe BankAccount do
 
         expect(subject.transaction_history.length).to eq(1)
         expect(subject.transaction_history.first).to be(transaction)
-        expect(subject.balance).to eq('£500.00')
+        expect(subject.account_balance).to eq(500)
       end
     end
   end

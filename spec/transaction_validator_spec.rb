@@ -11,12 +11,9 @@ RSpec.describe TransactionValidator do
         .to eq('Please enter a valid amount.')
     end
 
-    it 'will not accept a string as an amount' do
+    it 'will not accept a non-integer as an amount' do
       expect(subject.check('06/04/2021', 'credit', 'one thousand', 5000))
         .to eq('Please enter a valid amount.')
-    end
-
-    it 'will not accept a float as an amount' do
       expect(subject.check('06/04/2021', 'credit', 1045.67, 5000))
         .to eq('Please enter a valid amount.')
     end

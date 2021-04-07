@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# This class checks the user input and raises a warning if certain invalid inputs are detected.
 class TransactionValidator
   def self.check(_date, type, amount, balance)
     case false

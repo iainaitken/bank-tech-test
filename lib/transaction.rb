@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# This class holds the data for an individual transaction.
 class Transaction
   attr_reader :date, :type, :amount, :balance
 

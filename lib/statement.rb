@@ -1,20 +1,21 @@
+# frozen_string_literal: true
+
+# This class produces a statement of transactions.
 class Statement
   def self.print(transaction_history)
     puts 'date || credit || debit || balance'
-    # ledger = ''
     transaction_history.reverse.each do |transaction|
-      if transaction.type == 'credit'
+      case transaction.type
+      when 'credit'
         puts "#{transaction.date} || #{add_decimals(transaction.amount)} || || #{add_decimals(transaction.balance)}"
-      elsif transaction.type == 'debit'
+      when 'debit'
         puts "#{transaction.date} || || #{add_decimals(transaction.amount)} || #{add_decimals(transaction.balance)}"
       end
     end
-    return nil
+    nil
   end
 
-  private
-
   def self.add_decimals(number)
-    '%.2f' % number.to_s
+    format('%.2f', number)
   end
 end
