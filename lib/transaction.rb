@@ -3,8 +3,8 @@ class Transaction
   
   def initialize(date:, credit:, debit:, balance:)
     @date = date
-    @credit = credit.to_i unless credit == ""
-    @debit = debit.to_i unless debit == ""
-    @balance = balance.to_i
+    @credit = credit
+    @debit = debit
+    @balance = balance
   end
 end

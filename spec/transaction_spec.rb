@@ -8,11 +8,11 @@ RSpec.describe Transaction do
   end
 
   it 'stores the credit/debit amount' do
-    expect(subject.credit).to eq(500)
-    expect(subject.debit).to eq(nil)
+    expect(subject.credit).to eq('500')
+    expect(subject.debit).to eq('')
   end
 
   it 'stores the account balance' do
-    expect(subject.balance).to eq(500)
+    expect(subject.balance).to eq('500')
   end
 end
