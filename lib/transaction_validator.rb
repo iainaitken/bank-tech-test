@@ -1,6 +1,20 @@
 class TransactionValidator
   def self.check(date:, type:, amount:)
-    return 'Please enter a valid number.' unless amount > 0
-    return 'Please enter a valid transaction type.' unless type == 'credit' || type == 'debit'
+    case false
+    when check_amount(amount)
+      'Please enter a valid amount.'
+    when check_transaction_type(type)
+      'Please enter a valid transaction type.'
+    end
+  end
+
+  private
+
+  def self.check_amount(amount)
+    false unless amount.is_a?(Integer) && amount > 0
+  end
+
+  def self.check_transaction_type(type)
+    type == 'credit' || type == 'debit'
   end
 end
