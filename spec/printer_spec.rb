@@ -1,2 +1,3 @@
-require 'printer'
+# frozen_string_literal: true
 
+require 'printer'

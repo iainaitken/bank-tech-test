@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'statement'
 
 RSpec.describe Statement do
@@ -8,7 +10,7 @@ RSpec.describe Statement do
   end
 
   describe '#add_transaction' do
-    let(:transaction) { instance_double(Transaction, date: '06/04/2021', type: :credit, amount: 500, balance: 1000)}
+    let(:transaction) { instance_double(Transaction, date: '06/04/2021', type: :credit, amount: 500, balance: 1000) }
     it 'adds a transaction to the stored list' do
       subject.add_transaction(transaction)
 

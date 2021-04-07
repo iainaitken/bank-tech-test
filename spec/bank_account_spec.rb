@@ -35,7 +35,7 @@ RSpec.describe BankAccount do
     it 'allows the user to withdraw money from the account' do
       subject.deposit_funds(1000)
       expect(subject.withdraw_funds(500))
-        .to eq("You have withdrawn £5.00 from your account.")
+        .to eq('You have withdrawn £5.00 from your account.')
     end
 
     it 'decreases the users account balance' do
@@ -53,7 +53,7 @@ RSpec.describe BankAccount do
     it 'will not accept an invalid number' do
       subject.deposit_funds(1000)
       expect(subject.withdraw_funds(15.89))
-        .to eq("Please enter an amount in pence; for example, for £10.50, enter 1050.")
+        .to eq('Please enter an amount in pence; for example, for £10.50, enter 1050.')
     end
   end
 end

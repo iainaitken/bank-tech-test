@@ -30,6 +30,6 @@ class BankAccount
   private
 
   def format(number)
-    sprintf('£%.2f', number / 100)
+    format('£%.2f', number / 100)
   end
 end

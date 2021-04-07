@@ -1,12 +1,16 @@
+# frozen_string_literal: true
+
 require 'transaction'
 
 RSpec.describe Transaction do
-  subject { described_class.new(
-    date: '06/04/2021',
-    type: 'credit',
-    amount: '500',
-    starting_balance: '500'
-  ) }
+  subject do
+    described_class.new(
+      date: '06/04/2021',
+      type: 'credit',
+      amount: '500',
+      starting_balance: '500'
+    )
+  end
 
   it 'stores the date of a transaction' do
     expect(subject.date).to eq('06/04/2021')
