@@ -7,8 +7,8 @@ RSpec.describe Transaction do
     described_class.new(
       date: '06/04/2021',
       type: 'credit',
-      amount: '500',
-      starting_balance: '500'
+      amount: 500,
+      starting_balance: 500
     )
   end
 

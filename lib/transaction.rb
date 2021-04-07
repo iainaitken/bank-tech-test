@@ -6,8 +6,8 @@ class Transaction
   def initialize(date:, type:, amount:, starting_balance:)
     @date = date
     @type = type.to_sym
-    @amount = amount.to_i
-    @balance = starting_balance.to_i
+    @amount = amount
+    @balance = starting_balance
     adjust_balance
   end
 

@@ -14,7 +14,6 @@ RSpec.describe BankAccount do
   end
 
   describe '#add_transaction' do
-    
     let(:transaction) { instance_double(Transaction, date: '06/04/2021', type: :credit, amount: 500, balance: 1000) }
     
     it 'adds a transaction to the stored list' do
@@ -24,6 +23,10 @@ RSpec.describe BankAccount do
       expect(subject.transaction_history.length).to eq(1)
       expect(subject.transaction_history.first).to be(transaction)
     end
+
+    #  it 'updates the account balance' do
+    # 
+    # end
   end
 
   # describe '#deposit_funds' do
