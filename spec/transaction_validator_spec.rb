@@ -1,4 +1,6 @@
-require 'transaction_validator' 
+# frozen_string_literal: true
+
+require 'transaction_validator'
 
 RSpec.describe TransactionValidator do
   subject { described_class }
@@ -30,8 +32,7 @@ RSpec.describe TransactionValidator do
     end
 
     it 'clears valid transactions' do
-      expect(subject.check('06/04/2021', 'credit', 1000, 500))
-        .to eq('OK')
+      expect(subject.check('06/04/2021', 'credit', 1000, 500)).to eq('OK')
     end
   end
 end

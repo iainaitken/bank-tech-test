@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class TransactionValidator
-  def self.check(date, type, amount, balance)
+  def self.check(_date, type, amount, balance)
     case false
     when check_amount(amount)
       'Please enter a valid amount.'
@@ -12,19 +14,15 @@ class TransactionValidator
     end
   end
 
-  private
-
   def self.check_amount(amount)
-    false unless amount.is_a?(Integer) && amount > 0
+    false unless amount.is_a?(Integer) && amount.positive?
   end
 
   def self.check_transaction_type(type)
-    type == 'credit' || type == 'debit'
+    %w[credit debit].include?(type)
   end
 
   def self.check_overdrawn(amount, balance, type)
-    if type == 'debit'
-      false if amount > balance
-    end
+    false if type == ('debit') && (amount > balance)
   end
 end

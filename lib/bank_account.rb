@@ -2,7 +2,7 @@
 
 class BankAccount
   attr_reader :transaction_history
-  
+
   DEFAULT_BALANCE = 0
 
   def initialize(transaction_class = Transaction)
@@ -28,7 +28,7 @@ class BankAccount
   private
 
   def format(number)
-    '£%.2f' % (number)
+    '£%.2f' % number
   end
 
   def create_and_store_transaction(date, type, amount)
@@ -40,7 +40,7 @@ class BankAccount
     )
     @transaction_history.push(transaction)
   end
-  
+
   def update_balance(amount, type)
     case type
     when 'credit'
@@ -49,21 +49,4 @@ class BankAccount
       @account_balance -= amount
     end
   end
-  
-
-
-
-  # def deposit_funds(amount)
-
-
-  #   @balance += amount
-  #   "You have deposited #{format(amount)} into your account. Your balance is now #{format(@balance)}"
-  # end
-
-  # def withdraw_funds(amount)
-
-
-  #   @balance -= amount
-  #   "You have withdrawn #{format(amount)} from your account."
-  # end
 end

@@ -1,3 +1,5 @@
-require_relative 'bank_account.rb'
-require_relative 'transaction.rb'
-require_relative 'transaction_validator.rb'
+# frozen_string_literal: true
+
+require_relative 'bank_account'
+require_relative 'transaction'
+require_relative 'transaction_validator'
