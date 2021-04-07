@@ -16,19 +16,21 @@ RSpec.describe BankAccount do
   describe '#add_transaction' do
     let(:transaction) { instance_double(Transaction, date: '06/04/2021', type: :credit, amount: 500, balance: 1000) }
     
-    it 'adds a transaction to the stored list' do
-      transaction_class = class_double('Transaction', new: transaction).as_stubbed_const
-      subject.add_transaction('06/04/2021', 'credit', '500')
-
-      expect(subject.transaction_history.length).to eq(1)
-      expect(subject.transaction_history.first).to be(transaction)
+    context 'transaction passes validation checks' do
+      it 'adds a transaction to the stored list' do
+        transaction_class = class_double('Transaction', new: transaction).as_stubbed_const
+        subject.add_transaction('06/04/2021', 'credit', 500)
+  
+        expect(subject.transaction_history.length).to eq(1)
+        expect(subject.transaction_history.first).to be(transaction)
+      end
+      
+      #  it 'updates the account balance' do
+      # 
+      # end
     end
-
-    #  it 'updates the account balance' do
-    # 
-    # end
   end
-
+end
   # describe '#deposit_funds' do
   #   it 'lets the user add funds' do
   #     expect(subject.deposit_funds(1000))
@@ -55,12 +57,6 @@ RSpec.describe BankAccount do
   #     expect(subject.balance).to eql('£5.00')
   #   end
 
-  #   it 'will not allow the account to be overdrawn' do
-  #     subject.deposit_funds(1000)
-  #     expect(subject.withdraw_funds(1500))
-  #       .to eq("You cannot withdraw that much; your account balance is #{subject.balance}.")
-  #   end
-
 
   # end
 
@@ -69,4 +65,4 @@ RSpec.describe BankAccount do
       
   #   end
   # end
-end
+

@@ -1,5 +1,5 @@
 class TransactionValidator
-  def self.check(date:, type:, amount:, balance:)
+  def self.check(date, type, amount, balance)
     case false
     when check_amount(amount)
       'Please enter a valid amount.'

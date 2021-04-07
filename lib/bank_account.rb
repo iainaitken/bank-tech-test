@@ -16,6 +16,21 @@ class BankAccount
   end
 
   def add_transaction(date, type, amount)
+    validation_message = TransactionValidator.check(date, type, amount, balance)
+    if validation_message == 'OK'
+      create_and_store_transaction(date, type, amount)
+    else
+      validation_message
+    end
+  end
+
+  private
+
+  def format(number)
+    '£%.2f' % (number / 100)
+  end
+
+  def create_and_store_transaction(date, type, amount)
     transaction = @transaction_class.new(
       date: date,
       type: type,
@@ -24,8 +39,7 @@ class BankAccount
     )
     @transaction_history.push(transaction)
   end
-
-  # def deposit_funds(amount)
+    # def deposit_funds(amount)
   #   return 'Please enter an amount in pence; for example, for £10.50, enter 1050.' unless amount.is_a?(Integer)
   #   return 'Please enter a valid number.' if amount <= 0
 
@@ -40,10 +54,4 @@ class BankAccount
   #   @balance -= amount
   #   "You have withdrawn #{format(amount)} from your account."
   # end
-
-  private
-
-  def format(number)
-    '£%.2f' % (number / 100)
-  end
 end
