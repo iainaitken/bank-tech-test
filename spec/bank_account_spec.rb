@@ -13,6 +13,19 @@ RSpec.describe BankAccount do
     expect(subject.transaction_history).to eq([])
   end
 
+  describe '#add_transaction' do
+    
+    let(:transaction) { instance_double(Transaction, date: '06/04/2021', type: :credit, amount: 500, balance: 1000) }
+    
+    it 'adds a transaction to the stored list' do
+      transaction_class = class_double('Transaction', new: transaction).as_stubbed_const
+      subject.add_transaction('06/04/2021', 'credit', '500')
+
+      expect(subject.transaction_history.length).to eq(1)
+      expect(subject.transaction_history.first).to be(transaction)
+    end
+  end
+
   # describe '#deposit_funds' do
   #   it 'lets the user add funds' do
   #     expect(subject.deposit_funds(1000))

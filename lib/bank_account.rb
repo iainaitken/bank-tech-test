@@ -5,13 +5,24 @@ class BankAccount
   
   DEFAULT_BALANCE = 0
 
-  def initialize
+  def initialize(transaction_class = Transaction)
     @balance = DEFAULT_BALANCE
     @transaction_history = []
+    @transaction_class = transaction_class
   end
 
   def balance
     format(@balance)
+  end
+
+  def add_transaction(date, type, amount)
+    transaction = @transaction_class.new(
+      date: date,
+      type: type,
+      amount: amount,
+      starting_balance: @balance
+    )
+    @transaction_history.push(transaction)
   end
 
   # def deposit_funds(amount)
