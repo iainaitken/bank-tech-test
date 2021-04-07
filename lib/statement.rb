@@ -6,8 +6,8 @@ class Statement
   def list_transactions
     @list
   end
-  
-  private
 
-
+  def add_transaction(transaction)
+    @list.push(transaction)
+  end
 end
