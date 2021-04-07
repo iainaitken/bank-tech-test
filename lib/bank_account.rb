@@ -6,10 +6,11 @@ class BankAccount
 
   DEFAULT_BALANCE = 0
 
-  def initialize(transaction_class = Transaction)
+  def initialize(transaction_class = Transaction, statement_class = Statement)
     @account_balance = DEFAULT_BALANCE
     @transaction_history = []
     @transaction_class = transaction_class
+    @statement_class = statement_class
   end
 
   def add_transaction(date, type, amount)
@@ -20,6 +21,10 @@ class BankAccount
     else
       validation_message
     end
+  end
+
+  def print_statement
+    @statement_class.print(@transaction_history)
   end
 
   private
