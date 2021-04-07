@@ -5,7 +5,7 @@ class Transaction
 
   def initialize(date:, type:, amount:, starting_balance:)
     @date = date
-    @type = type.to_sym
+    @type = type
     @amount = amount
     @balance = starting_balance
     adjust_balance
@@ -15,9 +15,9 @@ class Transaction
 
   def adjust_balance
     case @type
-    when :credit
+    when 'credit'
       @balance += @amount
-    when :debit
+    when 'debit'
       @balance -= @amount
     end
   end

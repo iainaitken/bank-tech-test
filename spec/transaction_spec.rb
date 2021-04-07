@@ -17,7 +17,7 @@ RSpec.describe Transaction do
   end
 
   it 'stores the type of the transaction' do
-    expect(subject.type).to eq(:credit)
+    expect(subject.type).to eq('credit')
   end
 
   it 'stores the amount of the transaction' do
