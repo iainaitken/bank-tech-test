@@ -7,8 +7,8 @@ RSpec.describe TransactionValidator do
 
   describe '.check' do
     it 'will not accept a negative number' do
-      expect { subject.check('06/04/2021', 'credit', -1000, 5000) }
-        .to raise_error('Please enter a valid amount.')
+      expect(subject.check('06/04/2021', 'credit', -1000, 5000))
+        .to eq('Please enter a valid amount.')
     end
 
     # it 'will not accept a non-integer as an amount' do

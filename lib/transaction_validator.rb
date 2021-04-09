@@ -5,11 +5,23 @@ class TransactionValidator
   def self.check(_date, type, amount, balance)
     case false
     when check_amount(amount)
-      raise ValidationError.new('Please enter a valid amount.')
+      begin 
+        raise ValidationError.new('Please enter a valid amount.')
+      rescue ValidationError => e
+        "#{e.message}"
+      end
     when check_transaction_type(type)
-      'Please enter a valid transaction type.'
+      begin 
+        raise ValidationError.new('Please enter a valid transaction type.')
+      rescue ValidationError => e
+        "#{e.message}"
+      end
     when check_overdrawn(amount, balance, type)
-      'You cannot withdraw that much; please try again.'
+      begin 
+        raise ValidationError.new('You cannot withdraw that much; please try again.')
+      rescue ValidationError => e
+        "#{e.message}"
+      end
     else
       'OK'
     end
