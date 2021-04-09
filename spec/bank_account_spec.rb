@@ -31,7 +31,7 @@ RSpec.describe BankAccount do
 
         expect(subject.transaction_history.length).to eq(1)
         expect(subject.transaction_history.first).to be(transaction)
-        expect(subject.account_balance).to eq(500)
+        expect(subject.account_balance).to eq(1000)
       end
     end
   end
