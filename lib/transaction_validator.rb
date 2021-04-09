@@ -5,7 +5,7 @@ class TransactionValidator
   def self.check(_date, type, amount, balance)
     case false
     when check_amount(amount)
-      'Please enter a valid amount.'
+      raise ValidationError.new('Please enter a valid amount.')
     when check_transaction_type(type)
       'Please enter a valid transaction type.'
     when check_overdrawn(amount, balance, type)
