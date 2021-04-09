@@ -13,7 +13,7 @@ class BankAccount
 
   def add_transaction(date:, type:, amount:)
     validation_message = TransactionValidator.check(date, type, amount, @account_balance)
-    if validation_message == 'OK'
+    if validation_message == nil
       create_and_store_transaction(date, type, amount)
       update_balance(amount, type)
     else
