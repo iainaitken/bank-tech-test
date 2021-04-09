@@ -8,18 +8,17 @@ class Transaction
     @date = date
     @type = type
     @amount = amount
-    @balance = starting_balance
-    adjust_balance
+    @balance = adjust_balance(starting_balance)
   end
 
   private
 
-  def adjust_balance
+  def adjust_balance(starting_balance)
     case @type
     when 'credit'
-      @balance += @amount
+      starting_balance += @amount
     when 'debit'
-      @balance -= @amount
+      starting_balance -= @amount
     end
   end
 end

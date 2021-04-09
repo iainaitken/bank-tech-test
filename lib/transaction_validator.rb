@@ -23,7 +23,7 @@ class TransactionValidator
     begin 
       raise ValidationError.new('Please enter a valid amount.')
     rescue ValidationError => e
-      "#{e.message}"
+      e.message
     end
   end
 
@@ -35,7 +35,7 @@ class TransactionValidator
     begin 
       raise ValidationError.new('Please enter a valid transaction type.')
     rescue ValidationError => e
-      "#{e.message}"
+      e.message
     end
   end
 
@@ -47,7 +47,7 @@ class TransactionValidator
     begin 
       raise ValidationError.new('You cannot withdraw that much; please try again.')
     rescue ValidationError => e
-      "#{e.message}"
+      e.message
     end
   end
 end
