@@ -35,4 +35,12 @@ RSpec.describe BankAccount do
       end
     end
   end
+
+  describe '#print_statement' do
+    it 'passes a print message to the Statement class to print out the transaction history' do
+      statement_class = class_double('Statement', print: "test print").as_stubbed_const
+      
+      expect(subject.print_statement).to eq("test print")
+    end
+  end
 end
