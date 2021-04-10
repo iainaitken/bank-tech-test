@@ -13,25 +13,35 @@ RSpec.describe BankAccount do
     expect(subject.transaction_history).to eq([])
   end
 
-  describe '#add_transaction' do
-    let(:transaction) { instance_double(Transaction, date: '06/04/2021', type: :credit, amount: 500, balance: 1000) }
+  describe '#deposit' do
+    let(:transaction1) { instance_double(Transaction, date: '06/04/2021', type: :credit, amount: 500, balance: 500) }
+    
+    context 'transaction passes validation checks' do
+      it 'adds a transaction to the stored list' do
+        transaction_class = class_double('Transaction', new: transaction1).as_stubbed_const
+        subject.deposit(date: '06/04/2021', amount: 500)
+        
+        expect(subject.transaction_history.length).to eq(1)
+        expect(subject.transaction_history.first).to be(transaction1)
+      end
+    end
+  end
+  
+  describe '#withdraw' do
+    let(:transaction1) { instance_double(Transaction, date: '06/04/2021', type: :credit, amount: 500, balance: 500) }
+    let(:transaction2) { instance_double(Transaction, date: '06/04/2021', type: :debit, amount: 250, balance: 750) }
 
     context 'transaction passes validation checks' do
       it 'adds a transaction to the stored list' do
-        transaction_class = class_double('Transaction', new: transaction).as_stubbed_const
-        subject.add_transaction(date: '06/04/2021', type: 'credit', amount: 500)
+        transaction_class = class_double('Transaction').as_stubbed_const
+        allow(transaction_class).to receive(:new).and_return(transaction1, transaction2)
 
-        expect(subject.transaction_history.length).to eq(1)
-        expect(subject.transaction_history.first).to be(transaction)
-      end
+        subject.deposit(date: '06/04/2021', amount: 500)
+        subject.withdraw(date: '06/04/2021', amount: 250)
 
-      it 'updates the account balance' do
-        transaction_class = class_double('Transaction', new: transaction).as_stubbed_const
-        subject.add_transaction(date: '06/04/2021', type: 'credit', amount: 500)
-
-        expect(subject.transaction_history.length).to eq(1)
-        expect(subject.transaction_history.first).to be(transaction)
-        expect(subject.account_balance).to eq(1000)
+        expect(subject.transaction_history.length).to eq(2)
+        expect(subject.transaction_history.first).to be(transaction1)
+        expect(subject.transaction_history.last).to be(transaction2)
       end
     end
   end
