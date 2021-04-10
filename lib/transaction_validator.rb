@@ -2,7 +2,7 @@
 
 # This class checks the user input and raises a warning if certain invalid inputs are detected.
 class TransactionValidator
-  def self.check(_date, type, amount, balance)
+  def self.check(type, amount, balance)
     case false
     when check_amount(amount)
       amount_error

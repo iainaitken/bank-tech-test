@@ -11,7 +11,7 @@ RSpec.describe Transaction do
   end
   
   it 'stores the date of a transaction' do
-    expect(transaction.date).to eq('21:02:2021')
+    expect(transaction.date).to eq('21-02-2021')
   end
 
   it 'stores the type of the transaction' do

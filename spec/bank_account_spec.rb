@@ -19,7 +19,7 @@ RSpec.describe BankAccount do
     context 'transaction passes validation checks' do
       it 'adds a transaction to the stored list' do
         transaction_class = class_double('Transaction', new: transaction1).as_stubbed_const
-        subject.deposit(date: '06/04/2021', amount: 500)
+        subject.deposit(amount: 500)
         
         expect(subject.transaction_history.length).to eq(1)
         expect(subject.transaction_history.first).to be(transaction1)
@@ -36,8 +36,8 @@ RSpec.describe BankAccount do
         transaction_class = class_double('Transaction').as_stubbed_const
         allow(transaction_class).to receive(:new).and_return(transaction1, transaction2)
 
-        subject.deposit(date: '06/04/2021', amount: 500)
-        subject.withdraw(date: '06/04/2021', amount: 250)
+        subject.deposit(amount: 500)
+        subject.withdraw(amount: 250)
 
         expect(subject.transaction_history.length).to eq(2)
         expect(subject.transaction_history.first).to be(transaction1)

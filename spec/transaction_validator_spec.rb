@@ -7,29 +7,29 @@ RSpec.describe TransactionValidator do
 
   describe '.check' do
     it 'will not accept a negative number' do
-      expect(subject.check('06/04/2021', 'credit', -1000, 5000))
+      expect(subject.check('credit', -1000, 5000))
         .to eq('Please enter a valid amount.')
     end
 
     it 'will not accept a non-integer as an amount' do
-      expect(subject.check('06/04/2021', 'credit', 'one thousand', 5000))
+      expect(subject.check('credit', 'one thousand', 5000))
         .to eq('Please enter a valid amount.')
-      expect(subject.check('06/04/2021', 'credit', 1045.67, 5000))
+      expect(subject.check('credit', 1045.67, 5000))
         .to eq('Please enter a valid amount.')
     end
 
     it 'will not accept an invalid transaction type' do
-      expect(subject.check('06/04/2021', 'crdit', 1000, 5000))
+      expect(subject.check('crdit', 1000, 5000))
         .to eq('Please enter a valid transaction type.')
     end
 
     it 'will not allow the user account to become overdrawn' do
-      expect(subject.check('06/04/2021', 'debit', 1000, 500))
+      expect(subject.check('debit', 1000, 500))
         .to eq('You cannot withdraw that much; please try again.')
     end
 
     it 'clears valid transactions' do
-      expect(subject.check('06/04/2021', 'credit', 1000, 500)).to eq(nil)
+      expect(subject.check('credit', 1000, 500)).to eq(nil)
     end
   end
 end
