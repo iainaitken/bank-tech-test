@@ -3,7 +3,7 @@
 require 'transaction'
 
 RSpec.describe Transaction do
-  subject(:transaction) { described_class.new('credit', 500, 500) }
+  subject(:transaction) { described_class.new(:credit, 500, 500) }
   
   before do
     time = Time.new(2021,2,21)
@@ -15,7 +15,7 @@ RSpec.describe Transaction do
   end
 
   it 'stores the type of the transaction' do
-    expect(transaction.type).to eq('credit')
+    expect(transaction.type).to eq(:credit)
   end
 
   it 'stores the amount of the transaction' do

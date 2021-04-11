@@ -15,9 +15,9 @@ class Transaction
 
   def adjust_balance(starting_balance)
     case @type
-    when 'credit'
+    when :credit
       starting_balance += @amount
-    when 'debit'
+    when :debit
       starting_balance -= @amount
     end
   end

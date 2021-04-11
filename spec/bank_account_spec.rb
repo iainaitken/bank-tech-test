@@ -13,6 +13,20 @@ RSpec.describe BankAccount do
     expect(subject.transaction_history).to eq([])
   end
 
+# Notes for testing behaviour not state. 
+# deposit invokes add_transaction.
+# Add_transaction invokes TransactionValidator
+# Should stub TransactionValidator - do we need to inject that?
+# add_transaction then calls Transaction.new
+# need to stub Transaction
+# print_statement then calls Statement, which relies on data from Transaction
+# need to stub Statement, (and transaction again?)
+# What are we testing? We're not testing the stubbed classes, we're testing 
+# whether Statement receives the print command
+
+# Also can I cut down code in transaction validator? No need to check type now as that 
+# is hard-coded into the program
+
   describe '#deposit' do
     let(:transaction1) { instance_double(Transaction, date: '06/04/2021', type: :credit, amount: 500, balance: 500) }
     

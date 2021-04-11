@@ -6,8 +6,6 @@ class TransactionValidator
     case false
     when check_amount(amount)
       amount_error
-    when check_transaction_type(type)
-      type_error
     when check_overdrawn(amount, balance, type)
       balance_error
     end
@@ -27,20 +25,8 @@ class TransactionValidator
     end
   end
 
-  def self.check_transaction_type(type)
-    %w[credit debit].include?(type)
-  end
-
-  def self.type_error
-    begin 
-      raise ValidationError.new('Please enter a valid transaction type.')
-    rescue ValidationError => e
-      e.message
-    end
-  end
-
   def self.check_overdrawn(amount, balance, type)
-    false if type == ('debit') && (amount > balance)
+    false if type == (:debit) && (amount > balance)
   end
 
   def self.balance_error

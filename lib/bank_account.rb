@@ -15,7 +15,7 @@ class BankAccount
   end
 
   def deposit(amount:)
-    add_transaction('credit', amount)
+    add_transaction(:credit, amount)
   end
   
   def print_statement
@@ -23,7 +23,7 @@ class BankAccount
   end
 
   def withdraw(amount:)
-    add_transaction('debit', amount)
+    add_transaction(:debit, amount)
   end
   
   private
