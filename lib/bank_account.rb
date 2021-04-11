@@ -4,10 +4,15 @@
 class BankAccount
   attr_reader :transaction_history
 
-  def initialize(transaction_class = Transaction, statement_class = Statement)
+  def initialize(
+    transaction_class = Transaction,
+    statement_class = Statement,
+    transaction_validator_class = TransactionValidator
+    )
     @transaction_history = []
     @transaction_class = transaction_class
     @statement_class = statement_class
+    @transaction_validator_class = transaction_validator_class
   end
 
   def account_balance
@@ -29,7 +34,7 @@ class BankAccount
   private
   
   def add_transaction(type, amount)
-    validation_message = TransactionValidator.check(type, amount, account_balance)
+    validation_message = @transaction_validator_class.check(type, amount, account_balance)
     if validation_message == nil
       create_and_store_transaction(type, amount)
     else
