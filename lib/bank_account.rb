@@ -8,7 +8,7 @@ class BankAccount
     transaction_class = Transaction,
     statement_class = Statement,
     transaction_validator_class = TransactionValidator
-    )
+  )
     @transaction_history = []
     @transaction_class = transaction_class
     @statement_class = statement_class
@@ -22,7 +22,7 @@ class BankAccount
   def deposit(amount:)
     add_transaction(:credit, amount)
   end
-  
+
   def print_statement
     @statement_class.print(@transaction_history)
   end
@@ -30,12 +30,12 @@ class BankAccount
   def withdraw(amount:)
     add_transaction(:debit, amount)
   end
-  
+
   private
-  
+
   def add_transaction(type, amount)
     validation_message = @transaction_validator_class.check(type, amount, account_balance)
-    if validation_message == nil
+    if validation_message.nil?
       create_and_store_transaction(type, amount)
     else
       validation_message

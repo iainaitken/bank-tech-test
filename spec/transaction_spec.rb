@@ -4,12 +4,12 @@ require 'transaction'
 
 RSpec.describe Transaction do
   subject(:transaction) { described_class.new(:credit, 500, 500) }
-  
+
   before do
-    time = Time.new(2021,2,21)
+    time = Time.new(2021, 2, 21)
     allow(Time).to receive(:now).and_return(time)
   end
-  
+
   it 'stores the date of a transaction' do
     expect(transaction.date).to eq('21-02-2021')
   end

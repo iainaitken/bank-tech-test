@@ -1,5 +1,4 @@
+# frozen_string_literal: true
+
 class ValidationError < StandardError
-  def intialize(message)
-    super(message)
-  end
 end

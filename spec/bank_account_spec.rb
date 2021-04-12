@@ -24,9 +24,6 @@ RSpec.describe BankAccount do
 # What are we testing? We're not testing the stubbed classes, we're testing 
 # whether Statement receives the print command
 
-# Also can I cut down code in transaction validator? No need to check type now as that 
-# is hard-coded into the program
-
   describe '#deposit' do
     let(:transaction1) { instance_double(Transaction, date: '06/04/2021', type: :credit, amount: 500, balance: 500) }
     

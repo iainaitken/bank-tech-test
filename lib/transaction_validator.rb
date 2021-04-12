@@ -11,18 +11,14 @@ class TransactionValidator
     end
   end
 
-  private
-
   def self.check_amount(amount)
     false unless amount.is_a?(Integer) && amount.positive?
   end
 
   def self.amount_error
-    begin 
-      raise ValidationError.new('Please enter a valid amount.')
-    rescue ValidationError => e
-      e.message
-    end
+    raise ValidationError, 'Please enter a valid amount.'
+  rescue ValidationError => e
+    e.message
   end
 
   def self.check_overdrawn(amount, balance, type)
@@ -30,10 +26,8 @@ class TransactionValidator
   end
 
   def self.balance_error
-    begin 
-      raise ValidationError.new('You cannot withdraw that much; please try again.')
-    rescue ValidationError => e
-      e.message
-    end
+    raise ValidationError, 'You cannot withdraw that much; please try again.'
+  rescue ValidationError => e
+    e.message
   end
 end
