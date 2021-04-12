@@ -159,3 +159,29 @@ The program was build using a TDD approach.
 | Responsibility | Collaborator |
 | ----------- | --- |
 | Prints out a statement | BankAccount  |
+
+## Coach comments
+
+> This was a really good solution for this challenge. You’ve applied SRP well, your code is very readable and clean and also shown good use of mocking. Here is my more detailed feedback:
+> 
+> Documentation
+> 
+> - Really nice README. It’s good to see details of your reasoning and assumptions. The CRC cards are also a good way to show an overview of your design.
+> - It’s good that you called out that you handled edge cases as these are assumptions you are making that were not part of the original problem statement. These can also be things you can clarify with your interviewer before starting.
+>
+> Object-oriented design
+>
+> - Nice use of dependency injection!
+> - You also made good use of class methods in TransactionValidator and Statement
+> - You’ve nicely separated the concerns of printing statements, input validation and managing deposits and withdrawals from each other.
+> - Is string the most natural return type for TransactionValidator.check given that you are checking for a binary outcome? If the issue is that you want to be able to return a message as well, you could use exceptions instead, which are the natural way to deal with unexpected things at runtime.
+> - It would be nice to have separate deposit and withdraw functions so the user doesn’t have to specify the type, which they might get wrong
+> - Arguably, you might not want to let the user specify the date of a transaction - what if they doctor it?
+> - A neater way to adjust the balance in Transaction would be to assign the return value of adjust_balance directly to @balance in initialise. There is no need to store the “wrong” balance first.
+> - You shouldn’t need to store the account balance separately. It duplicates state since you’re already storing balances in @transaction_history
+>
+> Testing
+> - Nice use of mocking!
+> - It would be good to use the example from the acceptance criteria in your feature test so that you can demonstrate that they are met exactly (including the reverse chronological order with different dates). This will require using stubbing to control the date in your tests.
+> - You’re missing a test for BankAccount.print_statement in the unit test
+> - Testing the contents of the list of transactions is testing state rather than behaviour. Since BankAccount.print_statement is a public method, it’s the best to test the output of that method (behaviour) rather than look at the list of transaction itself (state).
