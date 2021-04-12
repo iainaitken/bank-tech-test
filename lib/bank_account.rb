@@ -7,12 +7,12 @@ class BankAccount
   def initialize(
     transaction_class = Transaction,
     statement_class = Statement,
-    transaction_validator_class = TransactionValidator
+    validator_class = TransactionValidator
   )
     @transaction_history = []
     @transaction_class = transaction_class
     @statement_class = statement_class
-    @transaction_validator_class = transaction_validator_class
+    @validator_class = validator_class
   end
 
   def account_balance
@@ -34,7 +34,7 @@ class BankAccount
   private
 
   def add_transaction(type, amount)
-    validation_message = @transaction_validator_class.check(type, amount, account_balance)
+    validation_message = @validator_class.check(type, amount, account_balance)
     if validation_message.nil?
       create_and_store_transaction(type, amount)
     else
@@ -45,5 +45,15 @@ class BankAccount
   def create_and_store_transaction(type, amount)
     transaction = @transaction_class.new(type, amount, account_balance)
     @transaction_history.push(transaction)
+    transaction_message(transaction)
+  end
+
+  def transaction_message(transaction)
+    case transaction.type
+    when :credit
+      "You have deposited £#{format('%.2f', transaction.amount)} into your account."
+    when :debit
+      "You have withdrawn £#{format('%.2f', transaction.amount)} from your account."
+    end
   end
 end

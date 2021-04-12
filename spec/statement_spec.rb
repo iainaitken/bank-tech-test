@@ -11,7 +11,7 @@ RSpec.describe Statement do
   it 'displays the transaction history' do
     expect { subject.print(transaction_history) }
       .to output(/date || credit || debit || balance\n/).to_stdout
-                                                        .and output(/|| || 750 || 2250/).to_stdout
-                                                                                        .and output(/|| 3000 || || 3000/).to_stdout
+      .and output(/|| || 750 || 2250/).to_stdout
+      .and output(/|| 3000 || || 3000/).to_stdout
   end
 end

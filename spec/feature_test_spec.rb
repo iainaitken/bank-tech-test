@@ -18,9 +18,9 @@ RSpec.describe 'feature test' do
 
     expect { account.print_statement }
       .to output(/date || credit || debit || balance\n/).to_stdout
-                                                        .and output(/28-02-2021 || || 500.00 || 2500.00/).to_stdout
-                                                                                                         .and output(/21-02-2021 || 2000.00 || || 3000.00/).to_stdout
-                                                                                                                                                           .and output(/14-02-2021 || 1000.00 || || 1000.00/).to_stdout
+      .and output(/28-02-2021 || || 500.00 || 2500.00/).to_stdout
+      .and output(/21-02-2021 || 2000.00 || || 3000.00/).to_stdout
+      .and output(/14-02-2021 || 1000.00 || || 1000.00/).to_stdout
 
     expect(account.withdraw(amount: 3000))
       .to eq('You cannot withdraw that much; please try again.')

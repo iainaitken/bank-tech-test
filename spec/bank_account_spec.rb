@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'bank_account'
+require 'statement'
 
 RSpec.describe BankAccount do
   subject { described_class.new }
@@ -13,55 +14,42 @@ RSpec.describe BankAccount do
     expect(subject.transaction_history).to eq([])
   end
 
-# Notes for testing behaviour not state. 
-# deposit invokes add_transaction.
-# Add_transaction invokes TransactionValidator
-# Should stub TransactionValidator - do we need to inject that?
-# add_transaction then calls Transaction.new
-# need to stub Transaction
-# print_statement then calls Statement, which relies on data from Transaction
-# need to stub Statement, (and transaction again?)
-# What are we testing? We're not testing the stubbed classes, we're testing 
-# whether Statement receives the print command
-
   describe '#deposit' do
     let(:transaction1) { instance_double(Transaction, date: '06/04/2021', type: :credit, amount: 500, balance: 500) }
-    
+
     context 'transaction passes validation checks' do
-      it 'adds a transaction to the stored list' do
-        transaction_class = class_double('Transaction', new: transaction1).as_stubbed_const
-        subject.deposit(amount: 500)
-        
-        expect(subject.transaction_history.length).to eq(1)
-        expect(subject.transaction_history.first).to be(transaction1)
+      it 'stores the transaction' do
+        validator_class = class_double(TransactionValidator, check: nil).as_stubbed_const
+        transaction_class = class_double(Transaction).as_stubbed_const
+        allow(transaction_class).to receive(:new).and_return(transaction1)
+
+        expect(subject.deposit(amount: 500)).to eq('You have deposited £500.00 into your account.')
       end
     end
   end
-  
+
   describe '#withdraw' do
     let(:transaction1) { instance_double(Transaction, date: '06/04/2021', type: :credit, amount: 500, balance: 500) }
-    let(:transaction2) { instance_double(Transaction, date: '06/04/2021', type: :debit, amount: 250, balance: 750) }
+    let(:transaction2) { instance_double(Transaction, date: '06/04/2021', type: :debit, amount: 250, balance: 250) }
 
     context 'transaction passes validation checks' do
-      it 'adds a transaction to the stored list' do
-        transaction_class = class_double('Transaction').as_stubbed_const
+      it 'stores the transaction' do
+        validator_class = class_double(TransactionValidator, check: nil).as_stubbed_const
+        transaction_class = class_double(Transaction).as_stubbed_const
         allow(transaction_class).to receive(:new).and_return(transaction1, transaction2)
 
         subject.deposit(amount: 500)
-        subject.withdraw(amount: 250)
 
-        expect(subject.transaction_history.length).to eq(2)
-        expect(subject.transaction_history.first).to be(transaction1)
-        expect(subject.transaction_history.last).to be(transaction2)
+        expect(subject.withdraw(amount: 250)).to eq('You have withdrawn £250.00 from your account.')
       end
     end
   end
 
   describe '#print_statement' do
     it 'passes a print message to the Statement class to print out the transaction history' do
-      statement_class = class_double('Statement', print: "test print").as_stubbed_const
-      
-      expect(subject.print_statement).to eq("test print")
+      statement_class = class_double('Statement', print: 'test print').as_stubbed_const
+
+      expect(subject.print_statement).to eq('test print')
     end
   end
 end
