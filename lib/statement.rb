@@ -6,9 +6,9 @@ class Statement
     puts 'date || credit || debit || balance'
     transaction_history.reverse.each do |transaction|
       case transaction.type
-      when 'credit'
+      when :credit
         puts "#{transaction.date} || #{add_decimals(transaction.amount)} || || #{add_decimals(transaction.balance)}"
-      when 'debit'
+      when :debit
         puts "#{transaction.date} || || #{add_decimals(transaction.amount)} || #{add_decimals(transaction.balance)}"
       end
     end
